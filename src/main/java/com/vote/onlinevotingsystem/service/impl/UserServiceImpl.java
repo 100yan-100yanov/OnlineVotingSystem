@@ -2,7 +2,7 @@ package com.vote.onlinevotingsystem.service.impl;
 
 import com.vote.onlinevotingsystem.model.dto.UserRegisterDTO;
 import com.vote.onlinevotingsystem.model.entity.User;
-import com.vote.onlinevotingsystem.model.enums.UserRole;
+import com.vote.onlinevotingsystem.model.enums.RoleType;
 import com.vote.onlinevotingsystem.repository.UserRepository;
 import com.vote.onlinevotingsystem.service.UserService;
 import org.springframework.stereotype.Service;
@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(userRegisterDTO.getPassword());
         user.setFirstName(userRegisterDTO.getFirstName());
         user.setLastName(userRegisterDTO.getLastName());
-        user.setRole(List.of(UserRole.VOTER));
+        user.setRole(List.of(RoleType.VOTER));
 
         return user;
     }

@@ -1,6 +1,6 @@
 package com.vote.onlinevotingsystem.model.entity;
 
-import com.vote.onlinevotingsystem.model.enums.UserRole;
+import com.vote.onlinevotingsystem.model.enums.RoleType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
@@ -22,8 +22,8 @@ public class User extends BaseEntity{
     @Email
     private String email;
 
-    @Enumerated(EnumType.STRING)
-    private List<UserRole> role;
+    @ManyToMany
+    private List<Role> roles;
 
     @Column(nullable = false)
     @Size(min = 2, max = 30)
@@ -57,12 +57,12 @@ public class User extends BaseEntity{
         this.email = email;
     }
 
-    public List<UserRole> getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(List<UserRole> role) {
-        this.role = role;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public String getFirstName() {

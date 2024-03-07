@@ -1,6 +1,6 @@
 package com.vote.onlinevotingsystem.model.enums;
 
-public enum UserRole {
+public enum RoleType {
 
     ADMIN, VOTER;
 }
