@@ -1,21 +1,20 @@
 package com.vote.onlinevotingsystem.model.dto;
 
-import com.vote.onlinevotingsystem.model.enums.PositionType;
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class CandidateAddDTO {
 
-    @Column(nullable = false)
+    @NotBlank
     @Size(min = 2, max = 30)
     private String firstName;
 
-    @Column(nullable = false)
+    @NotBlank
     @Size(min = 2, max = 30)
     private String lastName;
 
-    @Column(nullable = false)
-    private PositionType position;
+    @NotBlank
+    private String position;
 
     public String getFirstName() {
         return firstName;
@@ -33,11 +32,11 @@ public class CandidateAddDTO {
         this.lastName = lastName;
     }
 
-    public PositionType getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(PositionType position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 }

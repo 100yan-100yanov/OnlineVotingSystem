@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/candidates")
-public class CandidateManageController {
+public class CandidateController {
 
     private final CandidateService candidateService;
 
-    public CandidateManageController(CandidateService candidateService) {
+    public CandidateController(CandidateService candidateService) {
         this.candidateService = candidateService;
     }
 
