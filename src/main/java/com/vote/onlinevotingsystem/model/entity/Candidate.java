@@ -1,6 +1,7 @@
 package com.vote.onlinevotingsystem.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -17,6 +18,9 @@ public class Candidate extends BaseEntity{
 
     @ManyToOne
     private Position position;
+
+    @Min(0)
+    private Integer votes;
 
     public String getFirstName() {
         return firstName;
@@ -40,5 +44,13 @@ public class Candidate extends BaseEntity{
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public Integer getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Integer votes) {
+        this.votes = votes;
     }
 }
