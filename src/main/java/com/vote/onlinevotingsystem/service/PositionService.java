@@ -1,6 +1,5 @@
 package com.vote.onlinevotingsystem.service;
 
-import com.vote.onlinevotingsystem.model.dto.CandidateDTO;
 import com.vote.onlinevotingsystem.model.dto.PositionAddDTO;
 
 import java.util.List;
@@ -10,5 +9,7 @@ public interface PositionService {
 
     void delete(Long id);
 
-    Integer getTotalVotes(List<CandidateDTO> candidates);
+    Integer getTotalVotes(String position);
+
+    List<String> getPositions();
 }

@@ -1,7 +1,7 @@
 package com.vote.onlinevotingsystem.service;
 
 import com.vote.onlinevotingsystem.model.dto.CandidateAddDTO;
-import com.vote.onlinevotingsystem.model.dto.CandidateDTO;
+import com.vote.onlinevotingsystem.model.entity.Candidate;
 
 import java.util.List;
 
@@ -10,5 +10,7 @@ public interface CandidateService {
 
     void delete(Long id);
 
-    List<CandidateDTO> getCandidates(String position);
+    List<String> getCandidatesNames(String position);
+
+    List<Candidate> getCandidates(String position);
 }

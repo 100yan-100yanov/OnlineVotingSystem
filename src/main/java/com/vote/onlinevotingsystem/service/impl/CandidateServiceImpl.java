@@ -1,7 +1,6 @@
 package com.vote.onlinevotingsystem.service.impl;
 
 import com.vote.onlinevotingsystem.model.dto.CandidateAddDTO;
-import com.vote.onlinevotingsystem.model.dto.CandidateDTO;
 import com.vote.onlinevotingsystem.model.entity.Candidate;
 import com.vote.onlinevotingsystem.model.entity.Position;
 import com.vote.onlinevotingsystem.repository.CandidateRepository;
@@ -60,26 +59,16 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public List<CandidateDTO> getCandidates(String position) {
-        List<Candidate> candidates = candidateRepository.findByPosition_Type(position);
-
-        return mapToCandidatesDTO(candidates);
+    public List<String> getCandidatesNames(String position) {
+        return candidateRepository.findByPosition_Type(position)
+                .stream()
+                .map(candidate -> candidate.getFirstName() + " " + candidate.getLastName())
+                .toList();
     }
 
-    private List<CandidateDTO> mapToCandidatesDTO(List<Candidate> candidates) {
-        List<CandidateDTO> candidatesList = new ArrayList<>();
-
-        candidates
-                .forEach(candidate -> {
-                    CandidateDTO candidateDTO = new CandidateDTO();
-                    candidateDTO.setFirstName(candidateDTO.getFirstName());
-                    candidateDTO.setLastName(candidateDTO.getLastName());
-                    candidateDTO.setVotes(candidateDTO.getVotes());
-
-                    candidatesList.add(candidateDTO);
-                });
-
-        return candidatesList;
+    @Override
+    public List<Candidate> getCandidates(String position) {
+        return candidateRepository.findByPosition_Type(position);
     }
 
     private Candidate mapToCandidate(CandidateAddDTO candidateAddDTO, Position position) {

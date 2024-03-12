@@ -50,9 +50,9 @@ public class AdminController {
         return "";
     }
 
-    @GetMapping("/{id}/profile/change-password/")
-    public String changePassword(@PathVariable Long id) {
-
+    @GetMapping("/change-password/")
+    public String changePassword() {
+        //TODO
         return "change-password";
     }
 

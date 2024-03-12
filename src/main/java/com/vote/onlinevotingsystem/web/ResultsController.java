@@ -1,6 +1,5 @@
 package com.vote.onlinevotingsystem.web;
 
-import com.vote.onlinevotingsystem.model.dto.CandidateDTO;
 import com.vote.onlinevotingsystem.service.CandidateService;
 import com.vote.onlinevotingsystem.service.PositionService;
 import org.springframework.stereotype.Controller;
@@ -34,8 +33,8 @@ public class ResultsController {
     public String results(Model model,
                           @PathVariable String position) {
 
-        List<CandidateDTO> candidates = candidateService.getCandidates(position);
-        Integer totalVotes = positionService.getTotalVotes(candidates);
+        List<String> candidates = candidateService.getCandidatesNames(position);
+        Integer totalVotes = positionService.getTotalVotes(position);
 
         model.addAttribute("candidates", candidates);
         model.addAttribute("votes", totalVotes);

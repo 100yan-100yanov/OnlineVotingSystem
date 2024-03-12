@@ -1,9 +1,10 @@
 package com.vote.onlinevotingsystem.service.impl;
 
-import com.vote.onlinevotingsystem.model.dto.CandidateDTO;
 import com.vote.onlinevotingsystem.model.dto.PositionAddDTO;
+import com.vote.onlinevotingsystem.model.entity.Candidate;
 import com.vote.onlinevotingsystem.model.entity.Position;
 import com.vote.onlinevotingsystem.repository.PositionRepository;
+import com.vote.onlinevotingsystem.service.CandidateService;
 import com.vote.onlinevotingsystem.service.PositionService;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,12 @@ import java.util.Optional;
 public class PositionServiceImpl implements PositionService {
 
     private final PositionRepository positionRepository;
+    private final CandidateService candidateService;
 
-    public PositionServiceImpl(PositionRepository positionRepository) {
+    public PositionServiceImpl(PositionRepository positionRepository,
+                               CandidateService candidateService) {
         this.positionRepository = positionRepository;
+        this.candidateService = candidateService;
     }
 
     @Override
@@ -48,12 +52,20 @@ public class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public Integer getTotalVotes(List<CandidateDTO> candidates) {
-        return candidates
+    public Integer getTotalVotes(String position) {
+        return candidateService.getCandidates(position)
                 .stream()
-                .map(CandidateDTO::getVotes)
+                .map(Candidate::getVotes)
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
+
+    @Override
+    public List<String> getPositions() {
+        return positionRepository.findAll()
+                .stream()
+                .map(Position::getType)
+                .toList();
     }
 
     private Position mapToPosition(PositionAddDTO positionAddDTO) {
