@@ -1,7 +1,9 @@
 package com.vote.onlinevotingsystem.model.entity;
 
-import com.vote.onlinevotingsystem.model.enums.RoleType;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 

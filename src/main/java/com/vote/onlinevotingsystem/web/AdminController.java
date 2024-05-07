@@ -1,5 +1,6 @@
 package com.vote.onlinevotingsystem.web;
 
+import com.vote.onlinevotingsystem.model.dto.ProfileUpdateDTO;
 import com.vote.onlinevotingsystem.model.entity.User;
 import com.vote.onlinevotingsystem.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public AdminController(UserService userService) {
         this.userService = userService;
@@ -35,7 +36,7 @@ public class AdminController {
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
 
-        return "redirect:/"; //TODO Redirect to previous page
+        return "redirect:/admins";
     }
 
     @GetMapping("/{id}/profile")
@@ -44,10 +45,14 @@ public class AdminController {
         return "";
     }
 
-    @PostMapping("/{id}/profile/update")
-    public String updateProfile(@PathVariable Long id) {
-        //TODO
-        return "";
+    @PutMapping("/{id}/profile/update")
+    public String updateProfile(@PathVariable Long id,
+                                ProfileUpdateDTO profileUpdateDTO) {
+
+        userService.updateProfile(id, profileUpdateDTO);
+
+        return "redirect:/admins/{id}/profile";
+        //TODO Make it RESTful
     }
 
     @GetMapping("/change-password/")

@@ -28,7 +28,7 @@ public class VoteController {
         return "vote";
     }
 
-    @GetMapping
+    @GetMapping("/positions")
     public String getPosition(Model model) {
         List<String> positions = positionService.getPositions();
 
@@ -37,7 +37,7 @@ public class VoteController {
         return "redirect:/vote";
     }
 
-    @GetMapping
+    @GetMapping("/candidates")
     public String getCandidates(String position, Model model) {
         List<String> candidates = candidateService.getCandidatesNames(position);
 
@@ -46,7 +46,7 @@ public class VoteController {
         return "redirect:/vote";
     }
 
-    @PostMapping
+    @PostMapping("/candidate")
     public String vote(String candidate) {
 
         //TODO
