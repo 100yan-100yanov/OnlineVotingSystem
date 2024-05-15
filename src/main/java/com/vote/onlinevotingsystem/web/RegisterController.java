@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -20,13 +21,15 @@ public class RegisterController {
     }
 
     @GetMapping("/register")
-    public String register() {
+    public String register(@ModelAttribute("userRegisterDTO")
+                           UserRegisterDTO userRegisterDTO) {
         return "register";
     }
 
-    @PostMapping("register")
-    public String register(@Valid UserRegisterDTO userRegisterDTO,
-                           Model model,
+    @PostMapping("/register")
+    public String register(@Valid
+                           @ModelAttribute("userRegisterDTO")
+                           UserRegisterDTO userRegisterDTO,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
 

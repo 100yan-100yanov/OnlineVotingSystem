@@ -13,6 +13,9 @@ public class UserRegisterDTO {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String confirmPassword;
+
     @Column(nullable = false, unique = true)
     @Email
     private String email;
@@ -39,6 +42,14 @@ public class UserRegisterDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getEmail() {
