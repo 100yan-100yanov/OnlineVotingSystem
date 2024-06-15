@@ -33,8 +33,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getAdmin(Long id) {
-        return getUserById(id);
+    public User getUserById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+
+        if (user.isEmpty()) {
+            throw new IllegalArgumentException("User with id " + id + " does not exist!");
+        }
+
+        return user.get();
     }
 
     @Override
@@ -42,14 +48,6 @@ public class UserServiceImpl implements UserService {
         User user = getUserById(id);
 
         userRepository.delete(user);
-    }
-
-
-    @Override
-    public boolean changePassword(Long id, String password) {
-
-        //TODO
-        return false;
     }
 
     @Override
@@ -80,15 +78,5 @@ public class UserServiceImpl implements UserService {
     private boolean isRegistered(UserRegisterDTO userRegisterDTO) {
         return userRepository.findByUsername(userRegisterDTO.getUsername()).isPresent() ||
                 userRepository.findByEmail(userRegisterDTO.getEmail()).isPresent();
-    }
-
-    private User getUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-
-        if (user.isEmpty()) {
-            throw new IllegalArgumentException("User with id " + id + " does not exist!");
-        }
-
-        return user.get();
     }
 }

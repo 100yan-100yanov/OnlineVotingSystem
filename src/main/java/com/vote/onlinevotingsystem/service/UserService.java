@@ -7,11 +7,9 @@ import com.vote.onlinevotingsystem.model.entity.User;
 public interface UserService {
     void register(UserRegisterDTO userRegisterDTO);
 
-    User getAdmin(Long id);
+    User getUserById(Long id);
 
     void deleteUser(Long id);
-
-    boolean changePassword(Long id, String password);
 
     void updateProfile(Long id, ProfileUpdateDTO profileUpdateDTO);
 }

@@ -1,5 +1,6 @@
 package com.vote.onlinevotingsystem.web;
 
+import com.vote.onlinevotingsystem.model.dto.ChangePasswordDTO;
 import com.vote.onlinevotingsystem.model.dto.ProfileUpdateDTO;
 import com.vote.onlinevotingsystem.model.entity.User;
 import com.vote.onlinevotingsystem.service.UserService;
@@ -26,7 +27,7 @@ public class AdminController {
     public String getAdmin(Model model,
                            @PathVariable Long id) {
 
-        User admin = userService.getAdmin(id);
+        User admin = userService.getUserById(id);
         model.addAttribute("admin", admin);
 
         return "admin-manage";
@@ -40,9 +41,13 @@ public class AdminController {
     }
 
     @GetMapping("/{id}/profile")
-    public String userProfile(@PathVariable Long id) {
-        //TODO
-        return "";
+    public String userProfile(Model model,
+                              @PathVariable Long id) {
+
+        User user = userService.getUserById(id);
+        model.addAttribute("user", user);
+
+        return "profile";
     }
 
     @PutMapping("/{id}/profile/update")
@@ -55,9 +60,9 @@ public class AdminController {
         //TODO Make it RESTful
     }
 
-    @GetMapping("/change-password/")
-    public String changePassword() {
-        //TODO
+    @GetMapping("/profile/change-password/")
+    public String changePassword(@ModelAttribute("changePasswordDTO")
+                                 ChangePasswordDTO changePasswordDTO) {
         return "change-password";
     }
 
